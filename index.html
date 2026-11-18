@@ -1,0 +1,303 @@
+<!doctype html><html lang="ar" dir="rtl"><head><title>بيانات منفذي البرنامج</title><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}</style></head><body><title>بيانات منفذي البرنامج</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: one narrow RTL column; the implementers list is the whole tool */
+:root{
+  --bg:#f5f7f6; --surface:#ffffff; --fg:#17231f; --muted:#5b6b65; --line:#d9e2de;
+  --accent:#0f6b55; --accent-fg:#ffffff; --accent-soft:#e3f1ec; --danger:#b3261e; --ok:#1d7a46;
+  --display:"Reem Kufi","IBM Plex Sans Arabic",Tahoma,sans-serif;
+  --body:"IBM Plex Sans Arabic",Tahoma,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1614; --surface:#17211e; --fg:#e4ece9; --muted:#9db0a9; --line:#2a3833;
+  --accent:#4cc3a2; --accent-fg:#0b1512; --accent-soft:#1c312b; --danger:#f2867d; --ok:#6fd39a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1614; --surface:#17211e; --fg:#e4ece9; --muted:#9db0a9; --line:#2a3833;
+  --accent:#4cc3a2; --accent-fg:#0b1512; --accent-soft:#1c312b; --danger:#f2867d; --ok:#6fd39a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.7;direction:rtl}
+.wrap{max-width:760px;margin:0 auto;padding-block:28px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:20px}
+header .eyebrow{font-size:13px;color:var(--muted);letter-spacing:.02em}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(24px,5vw,32px);line-height:1.3;margin:4px 0 6px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:600;font-size:19px;margin:0}
+header p{margin:0;color:var(--muted);max-width:62ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px}
+details summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
+details summary::-webkit-details-marker{display:none}
+details summary .chev{color:var(--muted);font-size:13px;font-weight:400}
+details[open] summary{margin-bottom:12px}
+dl{display:grid;grid-template-columns:minmax(110px,170px) 1fr;gap:10px 16px;margin:0}
+dt{color:var(--muted);font-size:13.5px}
+dd{margin:0;min-width:0;white-space:pre-line}
+@media (max-width:520px){dl{grid-template-columns:1fr;gap:2px}dd{margin-bottom:10px}}
+.section-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.hint{color:var(--muted);font-size:13.5px;margin:4px 0 0}
+.rows{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+.row{display:grid;grid-template-columns:28px minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr) 32px;gap:10px;align-items:start;padding:12px;border:1px solid var(--line);border-radius:8px}
+.row .num{font-variant-numeric:tabular-nums;color:var(--muted);padding-top:30px;text-align:center}
+@media (max-width:620px){.row{grid-template-columns:minmax(0,1fr)}.row .num{padding:0;text-align:start;font-weight:600;color:var(--accent)}.row .num::before{content:'المنفذ رقم '}.row .del{justify-self:start}}
+label{display:block;font-size:13px;color:var(--muted);margin-bottom:4px}
+input,textarea{width:100%;min-width:0;max-width:100%;font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 10px}
+input:focus,textarea:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+input.bad{border-color:var(--danger)}
+.err{color:var(--danger);font-size:12.5px;min-height:0;margin-top:3px}
+.f{min-width:0}
+button{font:inherit;cursor:pointer;border-radius:7px;border:1px solid var(--line);background:var(--surface);color:var(--fg);padding:9px 16px}
+button.primary{background:var(--accent);color:var(--accent-fg);border-color:var(--accent);font-weight:600}
+button.ghost{border-style:dashed}
+button.del{border:none;background:none;color:var(--muted);padding:28px 4px 0;font-size:18px;line-height:1}
+@media (max-width:620px){button.del{padding:0;font-size:13.5px}}
+button:disabled{opacity:.55;cursor:default}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin-top:14px}
+@media (max-width:520px){.grid2{grid-template-columns:1fr}}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.status{padding:10px 14px;border-radius:8px;background:var(--accent-soft);font-size:14px}
+.status.bad{color:var(--danger)}
+.note{font-size:13px;color:var(--muted);margin:0}
+.wa{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--fg);border:1px solid var(--line);border-radius:7px;padding:9px 16px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:start;vertical-align:top}
+th{color:var(--muted);font-weight:500;font-size:13px}
+td{font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto;margin-top:12px}
+.pill{display:inline-block;font-size:12px;padding:1px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+.send{border-top:1px solid var(--line);padding-top:18px}
+.steps{margin:12px 0 0;padding:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:10px}
+.steps li{counter-increment:s;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 14px;border-radius:8px;background:var(--accent-soft)}
+.steps li span{min-width:0;flex:1 1 220px}
+.steps li span::before{content:counter(s);display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--accent);color:var(--accent-fg);font-size:13px;font-weight:600;margin-inline-end:10px}
+.alt{margin-top:18px;display:flex;flex-direction:column;gap:6px}
+#sheet{position:fixed;top:0;left:-10000px;width:794px;background:#fff;color:#111;font-family:var(--body);direction:rtl;padding:48px 52px;font-size:14px;line-height:1.7}
+#sheet .t{font-family:var(--display);font-size:22px;color:#0f6b55;margin:0 0 4px}
+#sheet .sub{color:#555;margin:0 0 18px;font-size:13px}
+#sheet table{width:100%;border-collapse:collapse;margin:10px 0 18px}
+#sheet th,#sheet td{border:1px solid #9fb3ab;padding:7px 8px;text-align:right;color:#111}
+#sheet th{background:#e3f1ec;font-weight:600;color:#0f3b30}
+#sheet h3{font-size:15px;margin:14px 0 4px;color:#0f3b30}
+#sheet .kv{display:grid;grid-template-columns:150px 1fr;gap:4px 12px}
+#sheet .kv b{font-weight:500;color:#555}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">نموذج (أ) · طلب تنفيذ برنامج · التطوع</div>
+    <h1>بيانات منفذي البرنامج</h1>
+    <p>اكتب اسم كل منفذ ومؤهله ورقم هويته الوطنية، ثم أرسلها كملف PDF إلى المنسق عبر واتساب.</p>
+  </header>
+
+  
+
+  <form class="card" id="form" novalidate>
+    <div class="section-head">
+      <h2>بيانات المنفذين للبرنامج</h2>
+      <span class="pill" id="count">0 منفذ</span>
+    </div>
+    <p class="hint">رقم الهوية الوطنية ١٠ أرقام. يمكنك إضافة أكثر من منفذ.</p>
+    <div class="rows" id="rows"><div class="row"><div class="num">1</div><div class="f f-name"><label for="n_0">منفذ/ة البرنامج</label><input id="n_0" data-k="name"></div><div class="f"><label for="q_0">المؤهل</label><input id="q_0" data-k="qual"></div><div class="f"><label for="i_0">الهوية الوطنية</label><input id="i_0" data-k="nid" inputmode="numeric" dir="ltr" maxlength="10"></div></div></div>
+    <div class="actions" style="margin-top:12px">
+      <button type="button" class="ghost" id="add">+ إضافة منفذ</button>
+    </div>
+
+    
+
+    <div class="send" id="pdfFlow" style="margin-top:22px">
+      <h2>إرسال النموذج كملف PDF</h2>
+      <ol class="steps">
+        <li><span>اضغط «تجهيز ملف PDF»، ثم «مشاركة / حفظ الملف».</span>
+          <button type="button" class="primary" id="pdf">تجهيز ملف PDF</button></li>
+        <li><span>افتح محادثة المنسق في واتساب وأرفق الملف المحفوظ.</span>
+          <a class="wa" id="waFile" href="https://wa.me/966500121522?text=%D9%85%D8%B1%D9%81%D9%82%20%D9%85%D9%84%D9%81%20%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D9%86%D9%81%D8%B0%D9%8A%D9%86%20(PDF)" target="_blank" rel="noopener">فتح واتساب المنسق</a></li>
+      </ol>
+      <p class="note" id="pdfNote" hidden>حفظ الملف غير متاح في هذا العرض. استخدم «إرسال كرسالة نصية» بالأسفل.</p>
+    </div>
+
+    <div class="alt">
+      <p class="note">طرق أخرى للإرسال:</p>
+      <div class="actions">
+        <a class="wa" id="wa" href="#" target="_blank" rel="noopener">إرسال كرسالة نصية في واتساب</a>
+        <button type="button" id="copy">نسخ البيانات</button>
+        
+      </div>
+      
+    </div>
+    <div class="status" id="status" hidden></div>
+  </form>
+
+  <div id="sheet" aria-hidden="true"></div>
+
+  
+</div>
+
+<script>
+try{const l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Reem+Kufi:wght@500;600&display=swap';document.head.appendChild(l);}catch(e){}
+(function(){
+const $=id=>document.getElementById(id);
+const AR='٠١٢٣٤٥٦٧٨٩';
+const norm=s=>String(s||'').replace(/[٠-٩]/g,d=>AR.indexOf(d)).trim();
+const rowsEl=$('rows');
+let pdfCache=null,db=null,user=null,myId=null,downloads=null,canSave=false,inboxRows=[];
+
+function addRow(v){
+  v=v||{};
+  const r=document.createElement('div');r.className='row';
+  const k=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+  r.innerHTML=`<div class="num"></div>
+  <div class="f f-name"><label for="n_${k}">منفذ/ة البرنامج</label><input id="n_${k}" data-k="name"><div class="err"></div></div>
+  <div class="f"><label for="q_${k}">المؤهل</label><input id="q_${k}" data-k="qual"><div class="err"></div></div>
+  <div class="f"><label for="i_${k}">الهوية الوطنية</label><input id="i_${k}" data-k="nid" inputmode="numeric" dir="ltr" maxlength="10"><div class="err"></div></div>
+  <button type="button" class="del" aria-label="حذف المنفذ">×</button>`;
+  r.querySelector('[data-k=name]').value=v.name||'';
+  r.querySelector('[data-k=qual]').value=v.qual||'';
+  r.querySelector('[data-k=nid]').value=v.nid||'';
+  r.querySelector('.del').onclick=()=>{r.remove();if(!rowsEl.children.length)addRow();renum();sync();};
+  r.addEventListener('input',sync);
+  rowsEl.appendChild(r);renum();
+}
+function renum(){[...rowsEl.children].forEach((r,i)=>r.querySelector('.num').textContent=(i+1));}
+function rows(){return [...rowsEl.children].map(r=>({name:r.querySelector('[data-k=name]').value.trim(),qual:r.querySelector('[data-k=qual]').value.trim(),nid:norm(r.querySelector('[data-k=nid]').value),el:r}));}
+function filled(){return rows().filter(x=>x.name||x.qual||x.nid);}
+function sender(){return{name:'',phone:'',city:'',email:'',notes:''};}
+
+function setErr(input,msg){input.classList.toggle('bad',!!msg);const e=input.parentElement.querySelector('.err');if(e)e.textContent=msg||'';}
+function validate(){
+  let ok=true;const list=filled();
+  rows().forEach(x=>{const [n,q,i]=['name','qual','nid'].map(k=>x.el.querySelector('[data-k='+k+']'));
+    const any=x.name||x.qual||x.nid;
+    setErr(n,any&&!x.name?'الاسم مطلوب':'');setErr(q,any&&!x.qual?'المؤهل مطلوب':'');
+    setErr(i,any&&!/^[12]\d{9}$/.test(x.nid)?'رقم الهوية ١٠ أرقام ويبدأ بـ 1 أو 2':'');
+    if(any&&(!x.name||!x.qual||!/^[12]\d{9}$/.test(x.nid)))ok=false;});
+  if(!list.length){const f=rows()[0].el.querySelector('[data-k=name]');setErr(f,'أضف منفذًا واحدًا على الأقل');ok=false;}
+  return ok;
+}
+function asText(){
+  const s=sender(),list=filled();
+  let t='بيانات المنفذين لبرنامج: مبادرة تعليم اللغة العربية للناطقين بغيرها\n\n';
+  list.forEach((x,i)=>{t+=`${i+1}) ${x.name}\n   المؤهل: ${x.qual}\n   الهوية الوطنية: ${x.nid}\n`;});
+  return t;
+}
+function sync(){
+  const n=rowsEl.children.length;$('count').textContent=(n===1?'منفذ واحد':n===2?'منفذان':n+' منفذين');
+  $('wa').href='https://wa.me/966500121522?text='+encodeURIComponent(asText());pdfLabel();
+  try{localStorage.setItem('draft',JSON.stringify({rows:filled().map(({name,qual,nid})=>({name,qual,nid})),s:sender()}));}catch(e){}
+}
+function status(msg,bad){const s=$('status');s.hidden=false;s.textContent=msg;s.classList.toggle('bad',!!bad);}
+async function copy(text,btn){
+  const old=btn.textContent;
+  try{await navigator.clipboard.writeText(text);btn.textContent='تم النسخ';}
+  catch(e){const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');btn.textContent='تم النسخ';}catch(_){btn.textContent='تعذّر النسخ';}ta.remove();}
+  setTimeout(()=>btn.textContent=old,1800);
+}
+
+$('add').onclick=()=>{addRow();sync();rowsEl.lastElementChild.querySelector('input').focus();};
+
+$('copy').onclick=()=>{if(!validate()){status('أكمل الحقول المطلوبة أولًا.',true);return;}copy(asText(),$('copy'));};
+$('wa').addEventListener('click',e=>{if(!validate()){e.preventDefault();status('أكمل الحقول المطلوبة أولًا.',true);}});
+
+$('form').addEventListener('submit',async e=>{
+  e.preventDefault();
+  if(!validate()){status('بعض الحقول ناقصة أو غير صحيحة. راجع الحقول المظللة بالأحمر.',true);return;}
+  if(true){status('الحفظ المباشر غير متاح لك هنا. استخدم «إرسال كرسالة نصية في واتساب» أو «نسخ البيانات» وأرسلها للمنسق.',true);return;}
+  const btn=$('submit');btn.disabled=true;btn.textContent='جارٍ الإرسال…';
+  try{
+    await db.collection('submissions').doc(myId).set({
+      implementers:filled().map(({name,qual,nid})=>({name,qual,nid})),
+      sender:sender(),submittedAt:new Date().toISOString()
+    });
+    status('تم الحفظ بنجاح. شكرًا لك. يمكنك تعديل البيانات وإعادة الإرسال في أي وقت، وستُحدَّث نسختك السابقة.');
+  }catch(err){status('تعذّر الإرسال ('+(err&&err.code||'خطأ')+'). استخدم «إرسال كرسالة نصية في واتساب» بدلًا من ذلك.',true);}
+  btn.disabled=false;btn.textContent='إرسال';
+});
+
+// restore draft
+let draft=null;try{draft=JSON.parse(localStorage.getItem('draft')||'null');}catch(e){}
+try{rowsEl.innerHTML='';
+if(draft&&draft.rows&&draft.rows.length){draft.rows.forEach(addRow);}
+}catch(e){rowsEl.innerHTML='';}
+while(rowsEl.children.length<1)addRow();
+
+sync();
+
+function setMode(ok){return;
+  canSave=ok;
+  $('mode').textContent=ok?'«حفظ مباشر» يحفظ بياناتك لدى المنسق داخل هذه الصفحة.'
+    :'الحفظ المباشر يحتاج حسابًا مضافًا للصفحة. أرسل النموذج كملف PDF بالخطوتين أعلاه، أو كرسالة نصية في واتساب.';
+  $('submit').disabled=!ok;
+}
+
+function renderInbox(){
+  const tb=$('inboxTable').tBodies[0];tb.innerHTML='';let n=0;
+  inboxRows.forEach(d=>{(d.implementers||[]).forEach(x=>{n++;const tr=document.createElement('tr');
+    [n,x.name,x.qual,x.nid,(d.sender||{}).name,(d.sender||{}).phone,(d.submittedAt||'').slice(0,10)].forEach(v=>{const td=document.createElement('td');td.textContent=v==null?'':v;tr.appendChild(td);});tb.appendChild(tr);});});
+  $('inboxCount').textContent=n+' منفذ';$('inboxEmpty').hidden=n>0;
+}
+function csv(){
+  const head=['منفذ/ة البرنامج','المؤهل','الهوية الوطنية','المرسل','رقم التواصل','المنطقة','البريد','التاريخ'];
+  const q=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"';
+  const lines=[head.map(q).join(',')];
+  inboxRows.forEach(d=>(d.implementers||[]).forEach(x=>{const s=d.sender||{};lines.push([x.name,x.qual,'\t'+x.nid,s.name,s.phone,s.city,s.email,(d.submittedAt||'').slice(0,10)].map(q).join(','));}));
+  return '﻿'+lines.join('\r\n');
+}
+if(0)$('copyAll').onclick=()=>copy(csv().replace('﻿','').replace(/"/g,'').replace(/,/g,'\t'),$('copyAll'));
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function buildSheet(){
+  const s=sender(),list=filled(),d=new Date();
+  const date=d.getFullYear()+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+String(d.getDate()).padStart(2,'0');
+  $('sheet').innerHTML=`<p class="t">نموذج (أ) · طلب تنفيذ برنامج · التطوع</p>
+  <p class="sub">بيانات المنفذين · تاريخ التعبئة ${date}</p>
+  <div class="kv"><b>اسم البرنامج</b><span>مبادرة تعليم اللغة العربية للناطقين بغيرها</span>
+</div>
+  <h3>بيانات المنفذين للبرنامج</h3>
+  <table><thead><tr><th style="width:36px">#</th><th>منفذ/ة البرنامج</th><th>المؤهل</th><th style="width:150px">الهوية الوطنية</th></tr></thead><tbody>
+  ${list.map((x,i)=>`<tr><td>${i+1}</td><td>${esc(x.name)}</td><td>${esc(x.qual)}</td><td style="direction:ltr;text-align:right">${esc(x.nid)}</td></tr>`).join('')}
+  </tbody></table>
+`;
+}
+function loadScript(src){return new Promise((res,rej)=>{const t=document.createElement('script');t.src=src;t.onload=res;t.onerror=()=>rej({code:'lib_load'});document.head.appendChild(t);});}
+let libs=null;
+function loadLibs(){if(window.html2canvas&&window.jspdf)return Promise.resolve();if(!libs)libs=Promise.all([loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'),loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js')]).catch(e=>{libs=null;throw e;});return libs;}
+async function makePdf(){
+  await loadLibs();
+  if(document.fonts&&document.fonts.ready)await document.fonts.ready;
+  buildSheet();
+  const canvas=await html2canvas($('sheet'),{scale:2,backgroundColor:'#ffffff',logging:false});
+  const pdf=new jspdf.jsPDF({unit:'pt',format:'a4',orientation:'portrait'});
+  const pw=pdf.internal.pageSize.getWidth(),ph=pdf.internal.pageSize.getHeight();
+  const pxPerPage=Math.floor(canvas.width*ph/pw);
+  for(let y=0,p=0;y<canvas.height;y+=pxPerPage,p++){
+    const h=Math.min(pxPerPage,canvas.height-y);
+    const c=document.createElement('canvas');c.width=canvas.width;c.height=h;
+    c.getContext('2d').drawImage(canvas,0,y,canvas.width,h,0,0,canvas.width,h);
+    if(p)pdf.addPage();
+    pdf.addImage(c.toDataURL('image/jpeg',0.92),'JPEG',0,0,pw,h*pw/canvas.width);
+  }
+  return pdf.output('blob');
+}
+window.__makePdf=makePdf;
+function fname(){const nm=(sender().name||'').replace(/[\\/:*?"<>|]/g,'').slice(0,40);return 'بيانات المنفذين'+(nm?' - '+nm:'')+'.pdf';}
+function pdfLabel(){const b=$('pdf');if(b&&!b.disabled)b.textContent=(pdfCache&&pdfCache.key===asText())?'مشاركة / حفظ الملف':'تجهيز ملف PDF';}
+$('pdf').onclick=async()=>{
+  if(!validate()){status('أكمل الحقول المطلوبة أولًا.',true);return;}
+  const btn=$('pdf'),key=asText();
+  if(!pdfCache||pdfCache.key!==key){
+    btn.disabled=true;btn.textContent='جارٍ تجهيز الملف…';
+    try{pdfCache={key,blob:await makePdf()};status('الملف جاهز. اضغط «مشاركة / حفظ الملف».');}
+    catch(e){status('تعذّر تجهيز الملف ('+((e&&(e.code||e.name||e.message))||'خطأ')+'). استخدم «إرسال كرسالة نصية في واتساب».',true);}
+    btn.disabled=false;pdfLabel();return;
+  }
+  const blob=pdfCache.blob;
+  const fn=fname();
+  const download=()=>{const u=URL.createObjectURL(blob);const a=document.createElement('a');a.href=u;a.download=fn;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),60000);
+    status('تم حفظ الملف في التنزيلات. الآن اضغط «فتح واتساب المنسق» وأرفق الملف.');};
+  let file=null;try{file=new File([blob],fn,{type:'application/pdf'});}catch(e){}
+  if(file&&navigator.canShare&&navigator.canShare({files:[file]})){
+    navigator.share({files:[file],title:fn}).then(()=>status('تمت المشاركة. تأكد أنك أرسلته إلى محادثة المنسق في واتساب.'))
+      .catch(err=>{if(err&&err.name==='AbortError')status('أُلغيت المشاركة. اضغط «مشاركة / حفظ الملف» مرة أخرى.',true);else download();});
+  }else download();
+};
+
+
+
+})();
+</script>
+</body></html>
